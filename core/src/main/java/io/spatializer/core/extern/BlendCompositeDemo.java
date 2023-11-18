@@ -1,4 +1,4 @@
-package io.spatializer.extern;
+package io.spatializer.core.extern;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
