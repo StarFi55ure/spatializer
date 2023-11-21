@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Hello world!
  *
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"io.spatializer.core.controllers"})
 public class MainApp
 {
     public static void main( String[] args )
