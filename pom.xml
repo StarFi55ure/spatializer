@@ -47,6 +47,12 @@
       <artifactId>groovy</artifactId>
       <version>${groovy.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy-groovysh</artifactId>
+      <version>${groovy.version}</version>
+<!--      <scope>runtime</scope>-->
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -62,33 +68,44 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.gmavenplus</groupId>
-        <artifactId>gmavenplus-plugin</artifactId>
-        <version>3.0.2</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.groovy</groupId>
-            <artifactId>groovy-groovysh</artifactId>
-            <version>${groovy.version}</version>
-            <scope>runtime</scope>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <goals>
-              <goal>addSources</goal>
-              <goal>addTestSources</goal>
-              <goal>generateStubs</goal>
-              <goal>compile</goal>
-              <goal>generateTestStubs</goal>
-              <goal>compileTests</goal>
-              <goal>removeStubs</goal>
-              <goal>removeTestStubs</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.gmavenplus</groupId>-->
+<!--        <artifactId>gmavenplus-plugin</artifactId>-->
+<!--        <version>3.0.2</version>-->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.apache.groovy</groupId>-->
+<!--            <artifactId>groovy-groovysh</artifactId>-->
+<!--            <version>${groovy.version}</version>-->
+<!--            <scope>runtime</scope>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>addSources</goal>-->
+<!--              <goal>addTestSources</goal>-->
+<!--              <goal>generateStubs</goal>-->
+<!--              <goal>compile</goal>-->
+<!--              <goal>generateTestStubs</goal>-->
+<!--              <goal>compileTests</goal>-->
+<!--              <goal>removeStubs</goal>-->
+<!--              <goal>removeTestStubs</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--          <execution>-->
+<!--            <id>shellout</id>-->
+<!--            <goals>-->
+<!--              <goal>execute</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--        <configuration>-->
+<!--          <scripts>-->
+<!--            <script>${project.basedir}/src/main/groovy/cli/shell/testshell.groovy</script>-->
+<!--          </scripts>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 </project>
