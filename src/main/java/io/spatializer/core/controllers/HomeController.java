@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import rawhttp.core.*;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 
 @Controller
@@ -24,16 +24,23 @@ public class HomeController {
         var commandLine = CommandLine.parse(exe);
         var executor = DefaultExecutor.builder().get();
 
-        var baos = new ByteArrayOutputStream();
-        var streamHandler = new PumpStreamHandler(baos);
-        executor.setStreamHandler(streamHandler);
-
-        try {
+        String stdout = "";
+        try(var baos = new ByteArrayOutputStream()) {
+            baos.writeBytes("HTTP/1.1 200 OK\n".getBytes());
+            executor.setStreamHandler(new PumpStreamHandler(baos));
             executor.execute(commandLine);
+
+            var bais = new ByteArrayInputStream(baos.toByteArray());
+            var rawResponse = new RawHttp().parseResponse(bais);
+            var body = rawResponse.getBody();
+            if (body.isPresent()) {
+                stdout = body.get().decodeBodyToString(StandardCharsets.UTF_8);
+            }
+            System.out.println(stdout);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        var stdout = baos.toString();
+
         return stdout;
     }
 
